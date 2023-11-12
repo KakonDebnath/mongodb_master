@@ -271,3 +271,23 @@ db.test
    ```js
    db.test.find({ age: { $in: [10, 20, 30, 40] } });
    ```
+
+   -  ## `Nested Array of Object` update with `($)` `(positional)` Operator: `$` operator update the firstOccurrence from an array
+   -  We can update any normal object with `$set`Operator.
+   -  When we need to update property element which is an array of object.
+   -  The element stored on any position.
+   -  To find out the element we can use `property.$.propertyName` : value
+   -  Example:
+   ```js
+   db.another_testing.updateOne(
+      {
+         _id: ObjectId("6550655ec31abae6aaa3419a"),
+         skills: { $elemMatch: { name: "C#" } },
+      },
+      {
+         $set: {
+            "skills.$.level": "Expert",
+         },
+      }
+   );
+   ```
